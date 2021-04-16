@@ -1,12 +1,20 @@
 package ru.kaz.pdt.sandbox;
 
 public class Point {
-  public static void main(String[] args) {
-    PointData P = new PointData(2,3,6,8);
+  public double p1;
+  public double p2;
+  public double p3;
+  public double p4;
 
-    System.out.println("Расстояние между двумя точками " + "=" + distance(P));
+  public Point(double p1, double p2, double p3, double p4) {
+    this.p1 = p1;
+    this.p2 = p2;
+    this.p3 = p3;
+    this.p4 = p4;
   }
-  public static double distance(PointData P) {
-    return Math.sqrt((P.p3-P.p1)*(P.p3-P.p1)+(P.p4-P.p2)*(P.p4-P.p2));
+  public double distance() {
+    return Math.sqrt((this.p3-this.p1)*(this.p3-this.p1)+(this.p4-this.p2)*(this.p4-this.p2));
   }
 }
+
+
