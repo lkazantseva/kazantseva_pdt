@@ -28,6 +28,7 @@ public class ContactDeletionTests {
     wd.findElement(By.name("selected[]")).click();
     wd.findElement(By.xpath("//input[@value='Delete']")).click();
     wd.switchTo().alert().accept();
+    wd.findElement(By.cssSelector("div.msgbox"));
     wd.findElement(By.linkText("home")).click();
   }
 
