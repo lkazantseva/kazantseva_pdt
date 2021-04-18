@@ -16,7 +16,7 @@ public class GroupCreationTests {
 
   @Test
   public void testGroupCreation() throws Exception {
-    wd.get("http://localhost/addressbook/");
+    wd.get("http://localhost/addressbook/group.php");
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys("admin");
