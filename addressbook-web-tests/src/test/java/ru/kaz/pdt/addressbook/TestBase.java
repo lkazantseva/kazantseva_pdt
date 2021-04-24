@@ -91,7 +91,7 @@ public class TestBase {
   }
 
   protected void returnToHomePage() {
-    wd.findElement(By.linkText("home page")).click();
+    wd.findElement(By.linkText("home")).click();
   }
 
   protected void submitContactCreation() {
@@ -115,5 +115,15 @@ public class TestBase {
 
   protected void gotoAddNewContactPage() {
     wd.findElement(By.linkText("add new")).click();
+  }
+
+  protected void deleteSelectedContact() {
+    wd.findElement(By.xpath("//input[@value='Delete']")).click();
+    wd.switchTo().alert().accept();
+    wd.findElement(By.cssSelector("div.msgbox"));
+  }
+
+  protected void selectContactToBeDeleted() {
+    wd.findElement(By.name("selected[]")).click();
   }
 }
