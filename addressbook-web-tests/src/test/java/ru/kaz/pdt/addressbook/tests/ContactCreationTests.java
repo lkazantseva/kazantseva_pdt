@@ -6,10 +6,10 @@ import ru.kaz.pdt.addressbook.model.ContactData;
 public class ContactCreationTests extends TestBase {
   @Test
   public void testContactCreation() throws Exception {
-    app.gotoAddNewContactPage();
+    app.getNavigationHelper().gotoAddNewContactPage();
     app.fillContactForm(new ContactData("Ivan", "Ivanov", "89094567898", "ivanovivan@yandex.ru"));
     app.submitContactCreation();
-    app.returnToHomePage();
+    app.getNavigationHelper().returnToHomePage();
   }
 
 }
