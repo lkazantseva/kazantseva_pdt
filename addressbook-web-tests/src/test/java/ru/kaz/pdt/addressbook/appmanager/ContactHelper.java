@@ -25,7 +25,16 @@ public class ContactHelper extends BaseHelper {
     click(By.cssSelector("div.msgbox"));
   }
 
-  public void selectContactToBeDeleted() {
+  public void selectContact() {
     click(By.name("selected[]"));
   }
+
+  public void initContactModification() {
+    click(By.xpath("//img[@alt='Edit']"));
+  }
+
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
 }
+
