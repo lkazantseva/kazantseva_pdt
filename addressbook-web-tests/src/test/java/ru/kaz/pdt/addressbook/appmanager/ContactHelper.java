@@ -14,6 +14,7 @@ public class ContactHelper extends BaseHelper {
   public void submitContactCreation() {
     click(By.xpath("(//input[@name='submit'])[2]"));
   }
+
   public void fillContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
@@ -46,13 +47,17 @@ public class ContactHelper extends BaseHelper {
   }
 
   public void createContact(ContactData contact, boolean b) {
-    fillContactForm(contact,true);
+    fillContactForm(contact, true);
     submitContactCreation();
 
   }
 
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
+  }
+
+  public int getContactCount() {
+    return wd.findElements(By.name("selected[]")).size();
   }
 }
 
