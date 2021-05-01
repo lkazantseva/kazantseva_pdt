@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import ru.kaz.pdt.addressbook.model.ContactData;
 import ru.kaz.pdt.addressbook.model.GroupData;
 
+import java.util.List;
+
 public class ContactDeletionTests extends TestBase {
 
   @Test
@@ -19,11 +21,11 @@ public class ContactDeletionTests extends TestBase {
       app.getContactHelper().createContact(new ContactData("Ivan", "Ivanov", "89094567898", "ivanovivan@yandex.ru", "test1"), true);
       app.getNavigationHelper().returnToHomePage();
     }
-    int before = app.getContactHelper().getContactCount();
-    app.getContactHelper().selectContact(before -1);
+    List<ContactData> before = app.getContactHelper().getContactList();
+    app.getContactHelper().selectContact(before.size() -1);
     app.getContactHelper().deleteSelectedContact();
     app.getNavigationHelper().returnToHomePage();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before - 1);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), before.size()- 1);
   }
 }
