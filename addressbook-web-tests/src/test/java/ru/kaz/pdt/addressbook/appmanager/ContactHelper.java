@@ -71,7 +71,6 @@ public class ContactHelper extends BaseHelper {
       String id = element.findElement(By.tagName("input")).getAttribute("value");
       String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String lastname =  element.findElement(By.cssSelector("td:nth-child(2)")).getText();
-
       ContactData contact = new ContactData(id,firstname, lastname, null,null,null);
       contacts.add(contact);
     }
