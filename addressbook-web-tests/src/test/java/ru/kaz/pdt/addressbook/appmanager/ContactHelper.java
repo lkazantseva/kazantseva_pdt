@@ -61,6 +61,7 @@ public class ContactHelper extends BaseHelper {
     fillContactForm(contact, false);
     submitContactModification();
   }
+
   public void delete(int index) {
     selectContact(index);
     deleteSelectedContact();
@@ -80,8 +81,8 @@ public class ContactHelper extends BaseHelper {
     for (WebElement element : elements) {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String firstname = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
-      String lastname =  element.findElement(By.cssSelector("td:nth-child(2)")).getText();
-      ContactData contact = new ContactData(id,firstname, lastname, null,null,null);
+      String lastname = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname);
       contacts.add(contact);
     }
     return contacts;
