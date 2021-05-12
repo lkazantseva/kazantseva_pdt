@@ -53,7 +53,13 @@ public class ContactHelper extends BaseHelper {
   public void createContact(ContactData contact, boolean b) {
     fillContactForm(contact, true);
     submitContactCreation();
+  }
 
+  public void modifyContact(int index, ContactData contact) {
+    selectContact(index);
+    initContactModification(index);
+    fillContactForm(contact, false);
+    submitContactModification();
   }
 
   public boolean isThereAContact() {

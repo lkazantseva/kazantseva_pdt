@@ -1,6 +1,7 @@
 package ru.kaz.pdt.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.kaz.pdt.addressbook.model.ContactData;
 import ru.kaz.pdt.addressbook.model.GroupData;
@@ -9,13 +10,18 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ContactCreationTests extends TestBase {
-  @Test
-  public void testContactCreation() throws Exception {
+
+  @BeforeMethod
+  public void ensurePreconditionsForCreationTests() {
     app.getNavigationHelper().gotoGroupPage();
     if (!app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupData("test1", null, null));
     }
     app.getNavigationHelper().returnToHomePage();
+  }
+
+  @Test
+  public void testContactCreation() throws Exception {
     List<ContactData> before = app.getContactHelper().getContactList();
     app.getNavigationHelper().gotoAddNewContactPage();
     ContactData contact = new ContactData("Ivan", "Ivanov", "89094567898", "ivanovivan@yandex.ru", "test1");
