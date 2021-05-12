@@ -13,20 +13,20 @@ public class ContactCreationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditionsForCreationTests() {
-    app.getNavigationHelper().gotoGroupPage();
-    if (!app.getGroupHelper().isThereAGroup()) {
-      app.getGroupHelper().createGroup(new GroupData("test1", null, null));
+    app.goTo().groupPage();
+    if (!app.group().isThereAGroup()) {
+      app.group().create(new GroupData("test1", null, null));
     }
-    app.getNavigationHelper().returnToHomePage();
+    app.goTo().returnToHomePage();
   }
 
   @Test
   public void testContactCreation() throws Exception {
     List<ContactData> before = app.getContactHelper().getContactList();
-    app.getNavigationHelper().gotoAddNewContactPage();
+    app.goTo().gotoAddNewContactPage();
     ContactData contact = new ContactData("Ivan", "Ivanov", "89094567898", "ivanovivan@yandex.ru", "test1");
     app.getContactHelper().createContact(contact, true);
-    app.getNavigationHelper().returnToHomePage();
+    app.goTo().returnToHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1);
 
