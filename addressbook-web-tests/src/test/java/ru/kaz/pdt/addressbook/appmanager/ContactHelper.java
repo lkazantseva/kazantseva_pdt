@@ -8,9 +8,7 @@ import org.testng.Assert;
 import ru.kaz.pdt.addressbook.model.ContactData;
 import ru.kaz.pdt.addressbook.model.Contacts;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends BaseHelper {
   public ContactHelper(WebDriver wd) {
@@ -89,5 +87,6 @@ public class ContactHelper extends BaseHelper {
     }
     return contacts;
   }
+
 }
 
