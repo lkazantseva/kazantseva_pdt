@@ -25,7 +25,7 @@ public class ContactCreationTests extends TestBase {
     Contacts before = app.contact().all();
     app.goTo().addNewContactPage();
     ContactData contact = new ContactData()
-            .withFirstname("Ivan").withLastname("Ivanov").withMobile("89094567898").withEmail("ivanovivan@yandex.ru").withGroup("test1");
+            .withFirstname("Ivan").withLastname("Ivanov").withMobilePhone("89094567898").withEmail("ivanovivan@yandex.ru").withGroup("test1");
     app.contact().create(contact, true);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
@@ -39,7 +39,7 @@ public class ContactCreationTests extends TestBase {
     Contacts before = app.contact().all();
     app.goTo().addNewContactPage();
     ContactData contact = new ContactData()
-            .withFirstname("Ivan'").withLastname("Ivanov'").withMobile("8909456789t").withEmail("ivanovivan@yandex.ru").withGroup("test1");
+            .withFirstname("Ivan'").withLastname("Ivanov'").withMobilePhone("8909456789t").withEmail("ivanovivan@yandex.ru").withGroup("test1");
     app.contact().create(contact, true);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size()));
