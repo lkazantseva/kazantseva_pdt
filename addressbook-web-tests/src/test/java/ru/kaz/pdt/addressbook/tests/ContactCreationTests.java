@@ -6,6 +6,8 @@ import ru.kaz.pdt.addressbook.model.ContactData;
 import ru.kaz.pdt.addressbook.model.Contacts;
 import ru.kaz.pdt.addressbook.model.GroupData;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -24,9 +26,11 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation() throws Exception {
     Contacts before = app.contact().all();
     app.goTo().addNewContactPage();
+    File photo = new File("src/test/resources/pdt.png");
     ContactData contact = new ContactData()
             .withFirstname("Ivan").withLastname("Ivanov").withMobilePhone("89094567898")
-            .withAddress("г. Москва, ул. Тверская, д. 5").withEmail("ivanovivan@yandex.ru").withGroup("test1");
+            .withAddress("г. Москва, ул. Тверская, д. 5").withEmail("ivanovivan@yandex.ru")
+            .withPhoto(photo).withGroup("test1");
     app.contact().create(contact, true);
     app.goTo().homePage();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
@@ -35,7 +39,7 @@ public class ContactCreationTests extends TestBase {
             (before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
 
-  @Test
+  @Test(enabled = false)
   public void testBadContactCreation() throws Exception {
     Contacts before = app.contact().all();
     app.goTo().addNewContactPage();
