@@ -23,7 +23,8 @@ public class ContactPhoneTests extends TestBase {
     if (app.contact().all().size() == 0) {
       app.goTo().addNewContactPage();
       app.contact().create(new ContactData()
-              .withFirstname("Ivan").withLastname("Ivanov").withMobilePhone("89094567898").withEmail("ivanovivan@yandex.ru").withGroup("test1"), true);
+              .withFirstname("Ivan").withLastname("Ivanov").withMobilePhone("89094567898")
+              .withAddress("г. Москва, ул. Тверская, д. 5").withEmail("ivanovivan@yandex.ru").withGroup("test1"), true);
       app.goTo().homePage();
     }
   }
