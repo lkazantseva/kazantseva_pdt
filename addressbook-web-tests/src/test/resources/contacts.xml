@@ -1,0 +1,11 @@
+<list>
+  <contact>
+    <firstname>Ivan</firstname>
+    <lastname>Ivanov</lastname>
+    <email>ivanovivan@yandex.ru</email>
+    <mobilePhone>89094567898</mobilePhone>
+    <group>test 1</group>
+    <address>г. Москва, ул. Тверская, д. 5</address>
+    <photo>src\test\resources\pdt1.png</photo>
+  </contact>
+</list>
