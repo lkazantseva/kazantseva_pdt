@@ -43,7 +43,7 @@ public class ContactDataGenerator {
       contacts.add(new ContactData().withFirstname(String.format("Ivan",i))
               .withLastname(String.format("Ivanov",i)).withAddress(String.format("г. Москва, ул. Тверская, д. 5",i))
               .withMobilePhone(String.format("89094567898",i)).withEmail(String.format("ivanovivan@yandex.ru",i))
-              .withGroup(String.format("test 1",i)));
+              .withGroup(String.format("test 1",i)).withPhoto(new File(String.format("src/test/resources/pdt1.png",i))));
     }
     return contacts;
   }
@@ -51,9 +51,9 @@ public class ContactDataGenerator {
   private void save(List<ContactData> contacts, File file) throws IOException {
     Writer writer = new FileWriter(file);
     for (ContactData contact : contacts) {
-      writer.write(String.format("%s;%s;%s;%s;%s;%s\n",contact.getFirstname(),
+      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s\n",contact.getFirstname(),
               contact.getLastname(), contact.getAddress(),contact.getMobilePhone(),
-              contact.getEmail(),contact.getGroup()));
+              contact.getEmail(),contact.getGroup(),contact.getPhoto().getPath()));
     }
     writer.close();
   }
