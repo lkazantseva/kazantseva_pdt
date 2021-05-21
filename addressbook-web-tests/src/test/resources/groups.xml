@@ -4,14 +4,4 @@
     <header>header0</header>
     <footer>footer0</footer>
   </group>
-  <group>
-    <name>test 1</name>
-    <header>header1</header>
-    <footer>footer1</footer>
-  </group>
-  <group>
-    <name>test 2</name>
-    <header>header2</header>
-    <footer>footer2</footer>
-  </group>
 </list>
