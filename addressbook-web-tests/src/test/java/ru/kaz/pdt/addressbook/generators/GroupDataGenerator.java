@@ -8,12 +8,10 @@ import com.solidfire.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.kaz.pdt.addressbook.model.GroupData;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class GroupDataGenerator {
 
@@ -25,6 +23,7 @@ public class GroupDataGenerator {
 
   @Parameter(names = "-d", description = "Data format")
   public String format;
+  private Properties properties;
 
   public static void main(String[] args) throws IOException {
     GroupDataGenerator generator = new GroupDataGenerator();
@@ -38,11 +37,16 @@ public class GroupDataGenerator {
     generator.run();
   }
 
-  private List<GroupData> generateGroups(int count) {
+  private List<GroupData> generateGroups(int count) throws IOException {
+    System.getProperty("target","local");
+    String target = System.getProperty("target","local");
+    properties = new Properties();
+    properties.load(new FileReader(new File(String.format("src/resources/%s.properties",target))));
     List<GroupData> groups = new ArrayList<GroupData>();
     for (int i = 0; i < count; i++) {
-      groups.add(new GroupData().withName(String.format("test %s", i))
-              .withHeader(String.format("header%s", i)).withFooter(String.format("footer%s", i)));
+      groups.add(new GroupData().withName(String.format(properties.getProperty("groupName"), i))
+              .withHeader(String.format(properties.getProperty("groupHeader"), i))
+              .withFooter(String.format(properties.getProperty("groupFooter"), i)));
     }
     return groups;
   }
