@@ -41,7 +41,7 @@ public class GroupDataGenerator {
     System.getProperty("target","local");
     String target = System.getProperty("target","local");
     properties = new Properties();
-    properties.load(new FileReader(new File(String.format("src/resources/%s.properties",target))));
+    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties",target))));
     List<GroupData> groups = new ArrayList<GroupData>();
     for (int i = 0; i < count; i++) {
       groups.add(new GroupData().withName(String.format(properties.getProperty("groupName"), i))

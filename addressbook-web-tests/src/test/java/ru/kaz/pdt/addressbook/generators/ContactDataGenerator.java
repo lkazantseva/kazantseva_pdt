@@ -8,12 +8,10 @@ import com.solidfire.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.kaz.pdt.addressbook.model.ContactData;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class ContactDataGenerator {
 
@@ -25,6 +23,7 @@ public class ContactDataGenerator {
 
   @Parameter(names = "-d", description = "Data format")
   public String format;
+  private Properties properties;
 
   public static void main(String[] args) throws IOException {
     ContactDataGenerator generator = new ContactDataGenerator();
@@ -38,13 +37,17 @@ public class ContactDataGenerator {
     generator.run();
   }
 
-  private List<ContactData> generateContacts(int count) {
+  private List<ContactData> generateContacts(int count) throws IOException {
+    System.getProperty("target", "local");
+    String target = System.getProperty("target", "local");
+    properties = new Properties();
+    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties",target))));
     List<ContactData> contacts = new ArrayList<ContactData>();
     for (int i = 0; i < count; i++) {
-      contacts.add(new ContactData().withFirstname(String.format("Ivan", i))
-              .withLastname(String.format("Ivanov", i)).withAddress(String.format("г. Москва, ул. Тверская, д. 5", i))
-              .withMobilePhone(String.format("89094567898", i)).withEmail(String.format("ivanovivan@yandex.ru", i))
-              .withGroup(String.format("test 1", i)).withPhoto(new File(String.format("src/test/resources/pdt1.png", i))));
+      contacts.add(new ContactData().withFirstname(String.format(properties.getProperty("firstName"), i))
+              .withLastname(String.format(properties.getProperty("lastName"), i)).withAddress(String.format(properties.getProperty("address"), i))
+              .withMobilePhone(String.format(properties.getProperty("mobilePhone"), i)).withEmail(String.format(properties.getProperty("email"), i))
+              .withGroup(String.format(properties.getProperty("group"), i)).withPhoto(new File(String.format(properties.getProperty("photo"), i))));
     }
     return contacts;
   }
