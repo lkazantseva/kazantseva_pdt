@@ -43,6 +43,7 @@
 
 
         <mapping class="ru.kaz.pdt.addressbook.model.GroupData"/>
+        <mapping class="ru.kaz.pdt.addressbook.model.ContactData"/>
 
     </session-factory>
 
