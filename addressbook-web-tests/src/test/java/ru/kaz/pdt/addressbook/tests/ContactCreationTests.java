@@ -57,38 +57,19 @@ public class ContactCreationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditionsForCreationTests() {
-    app.goTo().groupPage();
-    if (app.group().all().size() == 0) {
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
       app.group().create(new GroupData().withName("test1"));
     }
-    app.goTo().homePage();
   }
 
   @Test(dataProvider = "validContactsFromXml")
   public void testContactCreation(ContactData contact) throws Exception {
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     app.goTo().addNewContactPage();
     app.contact().create(contact, true);
-    app.goTo().homePage();
-    assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
-    assertThat(after, equalTo
-            (before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
-  }
-
-  @Test(enabled = false)
-  public void testBadContactCreation() throws Exception {
-    Contacts before = app.contact().all();
-    app.goTo().addNewContactPage();
-    File photo = new File("src/test/resources/pdt1.png");
-    ContactData contact = new ContactData()
-            .withFirstname("Ivan'").withLastname("Ivanov'").withMobilePhone("8909456789t")
-            .withEmail("ivanovivan@yandex.ru").withPhoto(photo).withGroup("test1");
-    app.contact().create(contact, true);
-    app.goTo().homePage();
-    assertThat(app.contact().count(), equalTo(before.size()));
-    Contacts after = app.contact().all();
-    assertThat(after, equalTo(before));
+    Contacts after = app.db().contacts();
+    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
 
 }
