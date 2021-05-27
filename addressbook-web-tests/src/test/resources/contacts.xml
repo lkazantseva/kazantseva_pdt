@@ -4,7 +4,25 @@
     <lastname>Ivanov</lastname>
     <email>ivanovivan@yandex.ru</email>
     <mobilePhone>89094567898</mobilePhone>
-    <group>test0</group>
+    <group>test 0</group>
+    <address>Moscow</address>
+    <photo>src\test\resources\pdt1.png</photo>
+  </contact>
+  <contact>
+    <firstname>Ivan</firstname>
+    <lastname>Ivanov</lastname>
+    <email>ivanovivan@yandex.ru</email>
+    <mobilePhone>89094567898</mobilePhone>
+    <group>test 1</group>
+    <address>Moscow</address>
+    <photo>src\test\resources\pdt1.png</photo>
+  </contact>
+  <contact>
+    <firstname>Ivan</firstname>
+    <lastname>Ivanov</lastname>
+    <email>ivanovivan@yandex.ru</email>
+    <mobilePhone>89094567898</mobilePhone>
+    <group>test 2</group>
     <address>Moscow</address>
     <photo>src\test\resources\pdt1.png</photo>
   </contact>

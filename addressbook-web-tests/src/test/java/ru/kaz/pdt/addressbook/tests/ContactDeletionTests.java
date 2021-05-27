@@ -22,7 +22,7 @@ public class ContactDeletionTests extends TestBase {
       app.goTo().addNewContactPage();
       app.contact().create(new ContactData()
               .withFirstname("Ivan").withLastname("Ivanov").withMobilePhone("89094567898")
-              .withAddress("г. Москва, ул. Тверская, д. 5").withEmail("ivanovivan@yandex.ru").withGroup("test1"), true);
+              .withAddress("Moscow").withEmail("ivanovivan@yandex.ru").withGroup("test1"), true);
     }
   }
 
@@ -34,6 +34,7 @@ public class ContactDeletionTests extends TestBase {
     app.contact().delete(deletedContact);
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(deletedContact)));
+    verifyContactListInUI();
   }
 
 }
