@@ -47,7 +47,7 @@ public class ContactDataGenerator {
       contacts.add(new ContactData().withFirstname(String.format(properties.getProperty("firstName"), i))
               .withLastname(String.format(properties.getProperty("lastName"), i)).withAddress(String.format(properties.getProperty("address"), i))
               .withMobilePhone(String.format(properties.getProperty("mobilePhone"), i)).withEmail(String.format(properties.getProperty("email"), i))
-              .withGroup(String.format(properties.getProperty("group"), i)).withPhoto(new File(String.format(properties.getProperty("photo"), i))));
+              .withPhoto(new File(String.format(properties.getProperty("photo"), i))));
     }
     return contacts;
   }
@@ -70,7 +70,7 @@ public class ContactDataGenerator {
       for (ContactData contact : contacts) {
         writer.write(String.format("%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstname(),
                 contact.getLastname(), contact.getAddress(), contact.getMobilePhone(),
-                contact.getEmail(), contact.getGroup(), contact.getPhoto().getPath()));
+                contact.getEmail(), contact.getPhoto().getPath()));
       }
     }
   }

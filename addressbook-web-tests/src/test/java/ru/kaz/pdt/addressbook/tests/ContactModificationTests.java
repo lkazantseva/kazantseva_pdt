@@ -6,6 +6,8 @@ import ru.kaz.pdt.addressbook.model.ContactData;
 import ru.kaz.pdt.addressbook.model.Contacts;
 import ru.kaz.pdt.addressbook.model.GroupData;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -21,7 +23,7 @@ public class ContactModificationTests extends TestBase {
       app.goTo().addNewContactPage();
       app.contact().create(new ContactData()
               .withFirstname("Ivan").withLastname("Ivanov").withMobilePhone("89094567898")
-              .withAddress("Moscow").withEmail("ivanovivan@yandex.ru").withGroup("test 1"), true);
+              .withAddress("Moscow").withEmail("ivanovivan@yandex.ru"), true);
     }
   }
 
@@ -29,9 +31,10 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification() {
     Contacts before = app.db().contacts();
     ContactData modifiedContact = before.iterator().next();
+    File photo = new File("src/test/resources/pdt2.png");
     ContactData contact = new ContactData()
             .withId(modifiedContact.getId()).withFirstname("Petr").withLastname("Petrov").withMobilePhone("89097865555")
-            .withAddress("Moscow").withEmail("petrpetrov@yandex.ru");
+            .withAddress("Moscow").withEmail("petrpetrov@yandex.ru").withPhoto(photo);
     app.goTo().homePage();
     app.contact().modify(contact);
     app.goTo().homePage();

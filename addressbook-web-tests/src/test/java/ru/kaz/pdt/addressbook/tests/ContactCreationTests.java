@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import ru.kaz.pdt.addressbook.model.ContactData;
 import ru.kaz.pdt.addressbook.model.Contacts;
 import ru.kaz.pdt.addressbook.model.GroupData;
+import ru.kaz.pdt.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -59,12 +60,14 @@ public class ContactCreationTests extends TestBase {
   public void ensurePreconditionsForCreationTests() {
     if (app.db().groups().size() == 0) {
       app.goTo().groupPage();
-      app.group().create(new GroupData().withName("test1"));
+      app.group().create(new GroupData().withName("test 1"));
     }
   }
 
   @Test(dataProvider = "validContactsFromXml")
   public void testContactCreation(ContactData contact) throws Exception {
+    Groups groups = app.db().groups();
+    contact.inGroup(groups.iterator().next());
     Contacts before = app.db().contacts();
     app.goTo().addNewContactPage();
     app.contact().create(contact, true);

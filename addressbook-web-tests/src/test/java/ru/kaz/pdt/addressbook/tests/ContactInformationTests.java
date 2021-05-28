@@ -24,7 +24,7 @@ public class ContactInformationTests extends TestBase {
       app.goTo().addNewContactPage();
       app.contact().create(new ContactData()
               .withFirstname("Ivan").withLastname("Ivanov").withMobilePhone("89094567898")
-              .withAddress("Moscow").withEmail("ivanovivan@yandex.ru").withGroup("test"), true);
+              .withAddress("Moscow").withEmail("ivanovivan@yandex.ru"), true);
       app.goTo().homePage();
     }
   }
