@@ -123,6 +123,25 @@ public class ContactHelper extends BaseHelper {
             .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
   }
 
+  public void addContactToGroup(ContactData contact) {
+    selectContactById(contact.getId());
+    addToGroup();
+    contactCache = null;
+  }
+
+  private void addToGroup() {
+    wd.findElement(By.name("add")).click();
+  }
+
+  private void selectGroupForAddingToContact(String name) {
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(name);
+  }
+
+  private void selectGroupsForContact() {
+    new Select(wd.findElement(By.cssSelector("select[name=\"group\"]"))).selectByVisibleText("[all]");
+  }
+  
+
 }
 
 
