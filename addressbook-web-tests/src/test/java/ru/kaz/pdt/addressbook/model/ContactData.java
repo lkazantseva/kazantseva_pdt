@@ -185,7 +185,11 @@ public class ContactData {
   }
 
   public File getPhoto() {
-    return new File(photo);
+    if (photo == null) {
+      return null;
+    } else {
+      return new File(photo);
+    }
   }
 
   public Groups getGroups() {
@@ -232,6 +236,11 @@ public class ContactData {
 
   public ContactData inGroup(GroupData group) {
     groups.add(group);
+    return this;
+  }
+
+  public ContactData withoutGroup(GroupData group) {
+    groups.remove(group);
     return this;
   }
 }

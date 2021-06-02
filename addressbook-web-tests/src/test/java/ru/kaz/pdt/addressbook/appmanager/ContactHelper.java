@@ -28,7 +28,7 @@ public class ContactHelper extends BaseHelper {
     attach(By.name("photo"), contactData.getPhoto());
 
     if (creation) {
-      if (contactData.getGroups().size() > 0) ;
+      if (contactData.getGroups().size() > 0)
       {
         Assert.assertTrue(contactData.getGroups().size() == 1);
         new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
@@ -123,25 +123,22 @@ public class ContactHelper extends BaseHelper {
             .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
   }
 
-  public void addContactToGroup(ContactData contact) {
-    selectContactById(contact.getId());
-    addToGroup();
-    contactCache = null;
-  }
-
-  private void addToGroup() {
+  public void addContactToGroup() {
     wd.findElement(By.name("add")).click();
   }
 
-  private void selectGroupForAddingToContact(String name) {
-    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(name);
+
+  public void selectGroupForContacts(int groupsId) {
+    new Select(wd.findElement(By.cssSelector("select[name=\"group\"]"))).selectByValue("" + groupsId +"");
   }
 
-  private void selectGroupsForContact() {
-    new Select(wd.findElement(By.cssSelector("select[name=\"group\"]"))).selectByVisibleText("[all]");
+  public void selectGroupForAddingToContact(int groupsId) {
+    new Select(wd.findElement(By.cssSelector("select[name=\"to_group\"]"))).selectByValue("" + groupsId +"");
   }
-  
 
+  public void deleteGroupForContact() {
+    wd.findElement(By.name("remove")).click();
+  }
 }
 
 
