@@ -22,7 +22,6 @@ public class RemoveContactFromGroup extends TestBase {
     }
     return null;
   }
-
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.db().groups().size() == 0) {
@@ -30,10 +29,16 @@ public class RemoveContactFromGroup extends TestBase {
       app.group().create(new GroupData().withName("test 1"));
     }
     if (getContactWithGroup() == null) {
-      app.goTo().addNewContactPage();
-      app.contact().create(new ContactData()
-              .withFirstname("Ivan").withLastname("Ivanov").withMobilePhone("89094567898")
-              .withAddress("Moscow").withEmail("ivanovivan@yandex.ru").inGroup(app.db().groups().iterator().next()), true);
+      if (app.db().contacts().size() == 0) {
+        app.goTo().addNewContactPage();
+        app.contact().create(new ContactData()
+                .withFirstname("Ivan").withLastname("Ivanov").withMobilePhone("89094567898")
+                .withAddress("Moscow").withEmail("ivanovivan@yandex.ru").inGroup(app.db().groups().iterator().next()), true);
+      } else {
+        app.goTo().homePage();
+        app.contact().selectContactById(app.db().contacts().iterator().next().getId());
+        app.contact().addContactToGroup();
+      }
     }
   }
 
@@ -49,5 +54,4 @@ public class RemoveContactFromGroup extends TestBase {
     Contacts getContactListAfter = app.db().contacts();
     assertThat(getContactListAfter, equalTo(getContactListBefore.withAdded(modifiedContact.withoutGroup(modifiedGroup))));
   }
-
 }
