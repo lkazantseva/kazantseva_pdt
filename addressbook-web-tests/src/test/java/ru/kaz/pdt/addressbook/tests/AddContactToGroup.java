@@ -43,7 +43,6 @@ public class AddContactToGroup extends TestBase {
     GroupData modifiedGroup = app.db().groups().iterator().next();
     ContactData modifiedContact = getContactWithoutGroup();
     Contacts getContactListBefore = app.db().contacts().without(modifiedContact);
-    assert modifiedContact != null;
     app.goTo().homePage();
     app.contact().selectContactById(modifiedContact.getId());
     app.contact().selectGroupForAddingToContact(modifiedGroup.getId());
