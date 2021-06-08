@@ -11,9 +11,6 @@ import ru.kaz.pdt.addressbook.model.Groups;
 
 import java.util.Iterator;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 public class RemoveContactFromGroup extends TestBase {
 
   private ContactData getContactWithGroup() {
