@@ -136,7 +136,7 @@ public class ContactHelper extends BaseHelper {
     new Select(wd.findElement(By.cssSelector("select[name=\"to_group\"]"))).selectByValue("" + groupsId +"");
   }
 
-  public void deleteGroupForContact() {
+  public void deleteGroupForContact(ContactData contact) {
     wd.findElement(By.name("remove")).click();
   }
 }

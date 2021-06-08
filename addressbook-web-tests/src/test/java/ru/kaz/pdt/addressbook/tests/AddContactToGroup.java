@@ -1,15 +1,15 @@
 package ru.kaz.pdt.addressbook.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.kaz.pdt.addressbook.model.ContactData;
 import ru.kaz.pdt.addressbook.model.Contacts;
 import ru.kaz.pdt.addressbook.model.GroupData;
+import ru.kaz.pdt.addressbook.model.Groups;
 
 import java.util.Iterator;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddContactToGroup extends TestBase {
 
@@ -42,13 +42,15 @@ public class AddContactToGroup extends TestBase {
   public void addContactToGroupTest() {
     GroupData modifiedGroup = app.db().groups().iterator().next();
     ContactData modifiedContact = getContactWithoutGroup();
-    Contacts getContactListBefore = app.db().contacts().without(modifiedContact);
     app.goTo().homePage();
     app.contact().selectContactById(modifiedContact.getId());
     app.contact().selectGroupForAddingToContact(modifiedGroup.getId());
     app.contact().addContactToGroup();
+    Groups groupBefore = modifiedContact.ActionsWithGroup(modifiedGroup, true).getGroups();
     Contacts getContactListAfter = app.db().contacts();
-    assertThat(getContactListAfter, equalTo(getContactListBefore.withAdded(modifiedContact.inGroup(modifiedGroup))));
+    int givenId = modifiedContact.getId();
+    Groups newGroupsList = getContactListAfter.stream().filter(c -> c.getId() == givenId).findFirst().get().getGroups();
+    MatcherAssert.assertThat(groupBefore, CoreMatchers.equalTo(newGroupsList));
   }
 
 }

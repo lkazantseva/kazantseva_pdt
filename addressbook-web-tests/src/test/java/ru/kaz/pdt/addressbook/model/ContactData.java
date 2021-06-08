@@ -16,43 +16,43 @@ import java.util.Set;
 public class ContactData {
   @XStreamOmitField
   @Id
-  @Column (name = "id")
+  @Column(name = "id")
   private int id = Integer.MAX_VALUE;
 
   @Expose
-  @Column (name = "firstname")
+  @Column(name = "firstname")
   private String firstname;
 
   @Expose
-  @Column (name = "lastname")
+  @Column(name = "lastname")
   private String lastname;
 
   @Expose
-  @Column (name = "email")
+  @Column(name = "email")
   @Type(type = "text")
   private String email;
 
-  @Column (name = "email2")
+  @Column(name = "email2")
   @Type(type = "text")
   private String email2;
 
-  @Column (name = "email3")
+  @Column(name = "email3")
   @Type(type = "text")
   private String email3;
 
   @Transient
   private String allEmails;
 
-  @Column (name = "home")
+  @Column(name = "home")
   @Type(type = "text")
   private String homePhone;
 
   @Expose
-  @Column (name = "mobile")
+  @Column(name = "mobile")
   @Type(type = "text")
   private String mobilePhone;
 
-  @Column (name = "work")
+  @Column(name = "work")
   @Type(type = "text")
   private String workPhone;
 
@@ -60,17 +60,17 @@ public class ContactData {
   private String allPhones;
 
   @Expose
-  @Column (name = "address")
+  @Column(name = "address")
   @Type(type = "text")
   private String address;
 
-  @Column (name = "photo")
+  @Column(name = "photo")
   @Type(type = "text")
   private String photo;
 
-  @ManyToMany (fetch = FetchType.EAGER)
-  @JoinTable (name = "address_in_groups",
-          joinColumns = @JoinColumn (name = "id"), inverseJoinColumns = @JoinColumn (name = "group_id"))
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
   private Set<GroupData> groups = new HashSet<GroupData>();
 
   public ContactData withId(int id) {
@@ -92,6 +92,7 @@ public class ContactData {
     this.homePhone = homePhone;
     return this;
   }
+
   public ContactData withMobilePhone(String mobilePhone) {
     this.mobilePhone = mobilePhone;
     return this;
@@ -111,6 +112,7 @@ public class ContactData {
     this.email = email;
     return this;
   }
+
   public ContactData withEmail2(String email2) {
     this.email2 = email2;
     return this;
@@ -243,4 +245,15 @@ public class ContactData {
     groups.remove(group);
     return this;
   }
+
+  public ContactData ActionsWithGroup(GroupData group, boolean toAdd) {
+    if (toAdd == true) {
+      groups.add(group);
+    }
+    else {
+      groups.remove(group);
+    }
+    return this;
+  }
 }
+
