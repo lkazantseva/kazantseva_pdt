@@ -43,10 +43,9 @@ public class RemoveContactFromGroup extends TestBase {
   }
 
   @Test
-  public void addContactToGroupTest() {
+  public void removeContactFromGroupTest() {
     ContactData modifiedContact = getContactWithGroup();
     GroupData modifiedGroup = modifiedContact.getGroups().iterator().next();
-    //Contacts getContactListBefore = app.db().contacts().without(modifiedContact);
     app.goTo().homePage();
     app.contact().selectGroupForContacts(modifiedGroup.getId());
     app.contact().selectContactById(modifiedContact.getId());
