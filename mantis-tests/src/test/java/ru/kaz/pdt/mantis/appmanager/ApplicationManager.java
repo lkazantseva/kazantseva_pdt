@@ -21,21 +21,21 @@ public class ApplicationManager {
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private AdminHelper adminHelper;
-  private  DbHelper dbHelper;
+  private DbHelper dbHelper;
 
-  public ApplicationManager(String browser){
+  public ApplicationManager(String browser) {
     this.browser = browser;
     properties = new Properties();
   }
 
-  public void init() throws IOException{
-    String target = System.getProperty("target","local");
+  public void init() throws IOException {
+    String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
     dbHelper = new DbHelper();
   }
 
   public void stop() {
-    if(wd!=null){
+    if (wd != null) {
       wd.quit();
     }
   }
@@ -49,7 +49,7 @@ public class ApplicationManager {
   }
 
   public RegistrationHelper registration() {
-    if(registrationHelper == null){
+    if (registrationHelper == null) {
       registrationHelper = new RegistrationHelper(this);
     }
     return registrationHelper;
@@ -63,10 +63,10 @@ public class ApplicationManager {
   }
 
   public WebDriver getDriver() {
-    if(wd==null){
+    if (wd == null) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
-      } else if (browser.equals(BrowserType.CHROME)){
+      } else if (browser.equals(BrowserType.CHROME)) {
         wd = new ChromeDriver();
       } else if (browser.equals(BrowserType.IE)) {
         wd = new InternetExplorerDriver();

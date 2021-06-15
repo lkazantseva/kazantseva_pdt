@@ -1,0 +1,31 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:7.4.0'
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'no.nils:wsdl2java:0.12'
+    }
+}
+
+apply plugin: 'no.nils.wsdl2java'
+
+wsdl2java {
+    //generatedWsdlDir = file ("src/main/java") //куда именно помещаются файлы
+    wsdlDir = file("C:/kazantseva_pdt/soap-sample/src/main/resources") // вспомогательная директория
+    wsdlsToGenerate = [   //  2d-array of wsdls and cxf-parameters
+                          ["C:/kazantseva_pdt/soap-sample/src/main/resources/ipservice.wsdl"]
+    ]
+
+}
