@@ -8,10 +8,11 @@ import org.openqa.selenium.WebDriver;
 import java.io.File;
 
 public class BaseHelper {
-  protected WebDriver wd;
   protected ApplicationManager app;
+  protected WebDriver wd;
 
   public BaseHelper(ApplicationManager app) {
+
     this.app = app;
     this.wd = app.getDriver();
   }
@@ -34,22 +35,23 @@ public class BaseHelper {
   protected void attach(By locator, File file) {
     if (file != null) {
       wd.findElement(locator).sendKeys(file.getAbsolutePath());
-      }
-    }
-
-  public boolean isElementPresent(By locator) {
-    try {
-      wd.findElement(locator);
-      return true;
-    } catch (NoSuchElementException ex) {
-      return false;
     }
   }
-  private boolean isAlertPresent() {
+
+  public boolean isAlertPresent() {
     try {
       wd.switchTo().alert();
       return true;
     } catch (NoAlertPresentException e) {
+      return false;
+    }
+  }
+
+  protected boolean isElementPresent(By locator) {
+    try {
+      wd.findElement(locator);
+      return true;
+    } catch (NoSuchElementException ex) {
       return false;
     }
   }

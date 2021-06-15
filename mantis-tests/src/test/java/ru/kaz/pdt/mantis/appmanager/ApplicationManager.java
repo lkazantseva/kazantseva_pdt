@@ -20,24 +20,22 @@ public class ApplicationManager {
   private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
   private MailHelper mailHelper;
-  private JamesHelper jamesHelper;
-  //private  DbHelper dbHelper;
- // private AdminHelper adminHelper;
+  private AdminHelper adminHelper;
+  private  DbHelper dbHelper;
 
-
-  public ApplicationManager(String browser) {
+  public ApplicationManager(String browser){
     this.browser = browser;
     properties = new Properties();
   }
 
-  public void init() throws IOException {
-    String target = System.getProperty("target", "local");
-    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties",target))));
-   // dbHelper = new DbHelper();
+  public void init() throws IOException{
+    String target = System.getProperty("target","local");
+    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+    dbHelper = new DbHelper();
   }
 
   public void stop() {
-    if (wd != null) {
+    if(wd!=null){
       wd.quit();
     }
   }
@@ -51,7 +49,7 @@ public class ApplicationManager {
   }
 
   public RegistrationHelper registration() {
-    if (registrationHelper == null) {
+    if(registrationHelper == null){
       registrationHelper = new RegistrationHelper(this);
     }
     return registrationHelper;
@@ -65,19 +63,20 @@ public class ApplicationManager {
   }
 
   public WebDriver getDriver() {
-    if (wd == null) {
+    if(wd==null){
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
-      } else if (browser.equals(BrowserType.CHROME)) {
+      } else if (browser.equals(BrowserType.CHROME)){
         wd = new ChromeDriver();
       } else if (browser.equals(BrowserType.IE)) {
         wd = new InternetExplorerDriver();
       }
-      wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+      wd.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
       wd.get(properties.getProperty("web.baseUrl"));
     }
     return wd;
   }
+
   public MailHelper mail() {
     if (mailHelper == null) {
       mailHelper = new MailHelper(this);
@@ -85,22 +84,19 @@ public class ApplicationManager {
     return mailHelper;
   }
 
-  public JamesHelper james() {
-    if (jamesHelper == null) {
-      jamesHelper = new JamesHelper(this);
+  public AdminHelper adminActions() {
+    if (adminHelper == null) {
+      adminHelper = new AdminHelper(this);
     }
-    return jamesHelper;
+    return adminHelper;
   }
 
-  //public DbHelper db() {
-   // return dbHelper;
-  //}
+  public DbHelper db() {
+    return dbHelper;
+  }
 
-  //public AdminHelper adminHelper() {
-  //  if (adminHelper == null) {
-   //   adminHelper = new AdminHelper(this);
-  //  }
-  //  return adminHelper;
- // }
+  public HttpSession sessionNew() {
+    return new HttpSession(this);
+  }
 
 }
