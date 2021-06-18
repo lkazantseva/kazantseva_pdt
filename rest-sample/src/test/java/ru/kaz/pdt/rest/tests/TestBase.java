@@ -37,12 +37,13 @@ public class TestBase {
     }.getType());
     String status = newIssue.stream().map((p) -> (p).getStatus()).findFirst().get().toString();
     System.out.println(status);
-    return ! "Open".equals(status);
+    return ! status.equals("Closed") && ! status.equals("Resolved");
   }
 
   private Executor getExecutor() {
     return Executor.newInstance().auth("288f44776e7bec4bf44fdfeb1e646490", "");
   }
+
   public void skipIfNotFixed(int issueId) throws IOException {
     if (isIssueOpen(issueId)) {
       throw new SkipException("Ignored because of issue " + issueId);
